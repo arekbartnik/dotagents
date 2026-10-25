@@ -1,0 +1,23 @@
+#!/bin/sh
+# Runs the poteto tools binary, building it into a cache on first use and after
+# any source change. The build key hashes go.mod and every non-test .go file,
+# so a stale binary never runs. The rename is atomic, so concurrent first runs
+# race safely.
+set -eu
+
+dir=$(cd "$(dirname "$0")" && pwd)
+command -v go >/dev/null 2>&1 || { echo "poteto: Go is required (https://go.dev/dl/)" >&2; exit 127; }
+
+if command -v sha256sum >/dev/null 2>&1; then hash="sha256sum"; else hash="shasum -a 256"; fi
+key=$(cd "$dir" && { cat go.mod; find cmd internal -name '*.go' ! -name '*_test.go' | LC_ALL=C sort | xargs cat; } | $hash | cut -c1-16)
+bin="${XDG_CACHE_HOME:-$HOME/.cache}/poteto-mode/poteto-$key"
+
+if [ ! -x "$bin" ]; then
+	mkdir -p "$(dirname "$bin")"
+	tmp="$bin.tmp.$$"
+	(cd "$dir" && go build -o "$tmp" ./cmd/poteto) || { rm -f "$tmp"; exit 1; }
+	mv -f "$tmp" "$bin"
+	find "$(dirname "$bin")" -name 'poteto-*' ! -name "poteto-$key" ! -name '*.tmp.*' -delete 2>/dev/null || true
+fi
+
+POTETO_SCRIPTS_DIR="$dir" exec "$bin" "$@"
