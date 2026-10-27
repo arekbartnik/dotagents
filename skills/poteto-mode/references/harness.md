@@ -41,7 +41,7 @@ The Subagents section of `SKILL.md` names two tiers. Each harness fills them fro
 
 | Tier | Cursor | Claude Code |
 | --- | --- | --- |
-| Strongest model | `claude-opus-5-5-xhigh` | `model: "opus"`, `effort: "xhigh"` |
+| Strongest model | `claude-opus-5-5-high` | `model: "opus"`, `effort: "high"` |
 | Fast code model | `grok-4.7-xhigh-fast` | `model: "sonnet"` |
 | Inherit the parent | Omit `model` | Omit `model` |
 
