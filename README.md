@@ -5,6 +5,7 @@
 - [pstack](https://github.com/cursor/plugins/tree/main/pstack)
 - [cursor-team-kit](https://github.com/cursor/plugins/tree/main/cursor-team-kit) (`deslop`, `control-ui`, `control-cli`)
 - [Matt Pocock's skills](https://github.com/mattpocock/skills)
+- [tstack](https://github.com/t3dotgg/tstack)
 
 ## pstack skills
 
@@ -69,3 +70,15 @@
 - `grill-with-docs`
 - `grilling`
 - `improve-codebase-architecture`
+
+## tsack
+
+- `babysit-pr`
+- `council`
+- `file-pr`
+- `full-send`
+- `full-stop`
+- `leaving-pr-comments`
+- `modernize`
+- `sol-loop`
+- `takeover`
